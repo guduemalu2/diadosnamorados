@@ -453,24 +453,23 @@ footer p {
 }
 
 /* Estilo do cupom quando já foi usado */
-.cupom.resgatado {
-  text-decoration: none;
-  background-color: #f0f0f0;
-  border-color: #ccc;
-  color: #999;
-  cursor: not-allowed;
-  transform: scale(0.95);
+/* Estilo do cupom quando já foi usado pelo menos uma vez */
+.cupom.usado {
+  background-color: #fff0f5;
+  border-color: #ff99cc;
+  transform: scale(0.98);
 }
-.cupom.resgatado:hover {
-  transform: scale(0.95);
-  background-color: #f0f0f0;
+.cupom.usado:hover {
+  background-color: #ffe6f0;
+  transform: scale(1);
 }
+/* Texto de histórico de uso */
 .data-resgate {
   display: block;
-  font-size: 11px;
-  color: #777;
-  margin-top: 5px;
-  font-style: italic;
+  font-size: 13px;
+  color: #d63031;
+  margin-top: 8px;
+  font-weight: bold;
 }
 
 /* Estilo do placar de pontos */
