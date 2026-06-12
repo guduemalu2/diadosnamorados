@@ -66,46 +66,64 @@ function fecharFoto() {
 }
 function resgatarCupom(idCupom, textoOriginal) {
   const elemento = document.getElementById(idCupom);
-
-  // Se já estiver resgatado, não faz nada
-  if (elemento.classList.contains("resgatado")) return;
-
   const custo = parseInt(elemento.getAttribute("data-custo"));
 
-  // Validação de pontos para os dois primeiros cupons
+  // Verifica se a pessoa tem pontos suficientes (ignorando se o custo for 0)
   if (custo > 0 && pontosIntercambio < custo) {
     alert(
-      `Você precisa de pelo menos ${custo} pontos para resgatar este cupom! Jogue o jogo da memória para conseguir.`,
+      `Saldo insuficiente! Você precisa de ${custo} pontos, mas tem apenas ${pontosIntercambio}. Jogue mais o Jogo da Memória!`,
     );
     return;
   }
 
-  // Confirmação de resgate
-  if (confirm(`Deseja mesmo resgatar "${textoOriginal}"?`)) {
+  // Pede confirmação antes de gastar os pontos
+  if (
+    confirm(
+      `Deseja resgatar "${textoOriginal}" por ${custo > 0 ? custo + " pontos" : "graça"}?`,
+    )
+  ) {
     // Deduz os pontos se houver custo
     if (custo > 0) {
       pontosIntercambio -= custo;
       atualizarDisplayPontos();
     }
 
-    // Pega a data atual formatada (DD/MM/AAAA)
+    // Pega a data atual formatada
     const agora = new Date();
     const dataFormatada = agora.toLocaleDateString("pt-BR");
 
-    // Aplica o resgate visualmente
-    aplicarStatusResgatado(elemento, textoOriginal, dataFormatada);
+    // Recupera os dados anteriores desse cupom (se existirem) ou cria novos
+    let dadosCupom = JSON.parse(localStorage.getItem(`status_${idCupom}`)) || {
+      vezes: 0,
+      ultimaData: "",
+    };
 
-    // Salva o status permanentemente no localStorage do navegador
-    localStorage.setItem(`status_${idCupom}`, dataFormatada);
+    // Adiciona +1 ao contador de vezes usado
+    dadosCupom.vezes += 1;
+    dadosCupom.ultimaData = dataFormatada;
+
+    // Salva o novo status no navegador
+    localStorage.setItem(`status_${idCupom}`, JSON.stringify(dadosCupom));
+
+    // Atualiza a tela
+    aplicarStatusResgatado(elemento, textoOriginal, dadosCupom, custo);
+
+    // Dá um aviso de sucesso
+    alert(`Resgate concluído! Você ainda tem ${pontosIntercambio} pontos.`);
   }
 }
 
-function aplicarStatusResgatado(elemento, texto, data) {
-  elemento.classList.add("resgatado");
-  elemento.innerHTML = `${texto} <br> <span class="data-resgate">🔓 Resgatado em: ${data}</span>`;
+function aplicarStatusResgatado(elemento, texto, dadosCupom, custo) {
+  // Muda um pouco o visual para mostrar que já foi usado, mas continua clicável
+  elemento.classList.add("usado");
+
+  // Atualiza o texto do cupom com o contador e a última data
+  let textoCusto = custo > 0 ? `(Custa ${custo} pontos)` : `(Grátis)`;
+  elemento.innerHTML = `${texto} <br><small>${textoCusto}</small><br> 
+    <span class="data-resgate">🔄 Usado ${dadosCupom.vezes}x (Última: ${dadosCupom.ultimaData})</span>`;
 }
 
-// Função para verificar cupons já resgatados anteriormente ao carregar a página
+// Carrega o histórico de cupons quando a página abre
 document.addEventListener("DOMContentLoaded", () => {
   const cupons = [
     { id: "cupom-1", texto: "🎟️ Vale uma massagem" },
@@ -114,10 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   cupons.forEach((c) => {
-    const salvo = localStorage.getItem(`status_${c.id}`);
-    if (salvo) {
+    // Tenta puxar os dados salvos no formato JSON
+    const salvo = JSON.parse(localStorage.getItem(`status_${c.id}`));
+    if (salvo && salvo.vezes > 0) {
       const elemento = document.getElementById(c.id);
-      if (elemento) aplicarStatusResgatado(elemento, c.texto, salvo);
+      const custo = parseInt(elemento.getAttribute("data-custo"));
+      if (elemento) aplicarStatusResgatado(elemento, c.texto, salvo, custo);
     }
   });
 });
