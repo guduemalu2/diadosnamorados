@@ -213,22 +213,22 @@ document.addEventListener("DOMContentLoaded", function () {
   // 📸 COLOQUE O NOME DAS SUAS FOTOS AQUI (8 pares = 16 cartas)
   // Certifique-se de que o nome do arquivo e a extensão (.jpg, .png) estão corretos
   const imagens = [
-    "fotos/memoriafoto1.jpg",
-    "fotos/memoriafoto1.jpg",
-    "fotos/memoriafoto2.jpg",
-    "fotos/memoriafoto2.jpg",
-    "fotos/memoriafoto3.jpg",
-    "fotos/memoriafoto3.jpg",
-    "fotos/memoriafoto4.jpg",
-    "fotos/memoriafoto4.jpg",
-    "fotos/memoriafoto5.jpg",
-    "fotos/memoriafoto5.jpg",
-    "fotos/memoriafoto6.jpg",
-    "fotos/memoriafoto6.jpg",
-    "fotos/memoriafoto7.jpg",
-    "fotos/memoriafoto7.jpg",
-    "fotos/memoriafoto8.jpg",
-    "fotos/memoriafoto8.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto1.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto1.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto2.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto2.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto3.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto3.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto4.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto4.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto5.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto5.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto6.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto6.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto7.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto7.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto8.jpg",
+    "https://raw.githubusercontent.com/guduemalu2/diadosnamorados/main/fotos/memoriafoto8.jpg",
   ];
 
   let cartasViradas = [];
