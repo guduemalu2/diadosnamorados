@@ -305,13 +305,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (paresEncontrados === imagens.length / 2) {
         setTimeout(() => {
           if (typeof pontosIntercambio !== "undefined") {
-            pontosIntercambio += 1;
+            pontosIntercambio += 5;
             if (typeof atualizarDisplayPontos === "function") {
               atualizarDisplayPontos();
             }
           }
           alert(
-            "Parabéns! Você completou o jogo da memória e ganhou +1 ponto! 🎉",
+            "Parabéns! Você completou o jogo da memória e ganhou +5 pontos! 🎉",
           );
         }, 300);
       }
